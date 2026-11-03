@@ -22,6 +22,7 @@ duo-showcase/
 ├── assets/
 │   ├── favicon.svg
 │   ├── image-sources.json     图片来源记录
+│   ├── icons/                本地 SVG 图标、来源及许可证
 │   └── images/
 ├── .gitignore
 └── .nojekyll
@@ -29,7 +30,7 @@ duo-showcase/
 
 ## 交互
 
-- 导航随当前阅读章节更新；手机端可以展开菜单。
+- 导航随当前阅读章节更新；手机菜单带展开、收起和淡入淡出过渡。
 - 配色按钮切换图片，使用透明度过渡。
 - 场景轮播支持箭头、进度按钮、键盘和触摸滑动。进度条每 5 秒走完一次，然后切换下一项。
 - 鼠标停留在轮播内容上、页面进入后台或轮播离开视口时暂停。手动操作后可通过播放按钮恢复。
@@ -47,6 +48,10 @@ duo-showcase/
 将本目录内容放在仓库根目录，打开 `Settings → Pages`，选择 `Deploy from a branch`，分支选 `main`，目录选 `/(root)`，保存后从 `Visit site` 打开网站。
 
 这个项目可以直接发布静态文件，`.nojekyll` 用于跳过 Jekyll 处理。详见 [GitHub Pages 官方说明](https://docs.github.com/en/pages/getting-started-with-github-pages/configuring-a-publishing-source-for-your-github-pages-site)。
+
+## 图标
+
+界面图标来自 [Lucide](https://lucide.dev/icons/)，以本地 SVG 图片加载。播放、暂停、菜单和问答展开状态通过切换图片显示，来源与许可证保存在 `assets/icons/`。
 
 ## 图片来源
 

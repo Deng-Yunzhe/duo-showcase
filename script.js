@@ -24,17 +24,20 @@ function initMobileMenu() {
   const menu = document.querySelector("#mobile-menu");
   toggle.hidden = false;
 
+  function setMenuOpen(isOpen) {
+    menu.classList.toggle("is-open", isOpen);
+    menu.inert = !isOpen;
+    menu.setAttribute("aria-hidden", String(!isOpen));
+    toggle.setAttribute("aria-expanded", String(isOpen));
+    toggle.setAttribute("aria-label", isOpen ? "关闭页面导航" : "打开页面导航");
+  }
+
   function closeMenu() {
-    menu.hidden = true;
-    toggle.setAttribute("aria-expanded", "false");
-    toggle.setAttribute("aria-label", "打开页面导航");
+    setMenuOpen(false);
   }
 
   toggle.addEventListener("click", function () {
-    const isOpen = toggle.getAttribute("aria-expanded") === "true";
-    menu.hidden = isOpen;
-    toggle.setAttribute("aria-expanded", String(!isOpen));
-    toggle.setAttribute("aria-label", isOpen ? "打开页面导航" : "关闭页面导航");
+    setMenuOpen(toggle.getAttribute("aria-expanded") !== "true");
   });
 
   menu.addEventListener("click", function (event) {
@@ -44,7 +47,7 @@ function initMobileMenu() {
   });
 
   document.addEventListener("keydown", function (event) {
-    if (event.key === "Escape" && !menu.hidden) {
+    if (event.key === "Escape" && menu.classList.contains("is-open")) {
       closeMenu();
       toggle.focus();
     }
@@ -136,6 +139,8 @@ function initCarousel() {
   const next = document.querySelector("#slide-next");
   const count = document.querySelector("#carousel-count");
   const toggle = document.querySelector("#carousel-toggle");
+  const playIcon = toggle.querySelector(".play-icon");
+  const pauseIcon = toggle.querySelector(".pause-icon");
   const reducedMotion = window.matchMedia("(prefers-reduced-motion: reduce)");
   let currentIndex = 0;
   let autoplayEnabled = !reducedMotion.matches;
@@ -149,7 +154,8 @@ function initCarousel() {
     carousel.classList.toggle("is-paused", !playing);
     toggle.setAttribute("aria-pressed", String(autoplayEnabled));
     toggle.setAttribute("aria-label", autoplayEnabled ? "暂停自动播放" : "播放轮播");
-    toggle.querySelector("span").textContent = autoplayEnabled ? "Ⅱ" : "▶";
+    playIcon.hidden = autoplayEnabled;
+    pauseIcon.hidden = !autoplayEnabled;
     count.setAttribute("aria-live", autoplayEnabled ? "off" : "polite");
   }
 

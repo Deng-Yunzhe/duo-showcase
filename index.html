@@ -20,7 +20,7 @@
         <a href="#experience">体验</a>
         <a href="#camera">影像</a></nav>
         <div class="project-label">
-          <span class="project-label__author">邓蕴哲独立设计开发作品</span>
+          <span class="project-label__author">邓蕴哲demo</span>
           <span class="project-label__purpose">仅供与兰飞鱼公司面试展示使用</span>
         </div>
       </div>
@@ -29,21 +29,28 @@
           <a class="product-name" href="#top">iPhone Duo</a>
           <nav class="product-links" aria-label="产品章节"><a href="#design">近距离看看</a>
           <a href="#faq">常见问题</a>
-          <a class="button button--small" href="#experience">开始探索 <span aria-hidden="true">↗</span></a></nav>
-          <button class="menu-toggle icon-button" type="button" aria-label="打开页面导航" aria-expanded="false" aria-controls="mobile-menu" hidden><span></span><span></span></button>
+          <a class="button button--small" href="#experience">开始探索 <img class="ui-icon" src="assets/icons/arrow-up-right-white.svg" width="20" height="20" alt="" aria-hidden="true"></a></nav>
+          <button class="menu-toggle icon-button" type="button" aria-label="打开页面导航" aria-expanded="false" aria-controls="mobile-menu" hidden>
+            <img class="ui-icon menu-icon-open" src="assets/icons/menu.svg" width="20" height="20" alt="" aria-hidden="true">
+            <img class="ui-icon menu-icon-close" src="assets/icons/x.svg" width="20" height="20" alt="" aria-hidden="true">
+          </button>
         </div>
-        <nav class="mobile-menu shell" id="mobile-menu" aria-label="手机页面导航" hidden><a href="#highlights">产品亮点</a><a href="#design">外观设计</a>
+        <div class="mobile-menu-panel" id="mobile-menu" aria-hidden="true" inert>
+          <div class="mobile-menu-clip">
+            <nav class="mobile-menu shell" aria-label="手机页面导航"><a href="#highlights">产品亮点</a><a href="#design">外观设计</a>
         <a href="#experience">场景体验</a><a href="#camera">摄影体验</a><a href="#faq">常见问题</a></nav>
+          </div>
+        </div>
       </div>
     </header>
     <main id="main">
       <section class="hero" aria-labelledby="hero-title">
         <div class="hero__copy shell">
-          <p class="eyebrow hero__eyebrow"><span class="new-dot" aria-hidden="true"></span> 重新想象 iPhone 的另一面</p>
+          <p class="hero__tagline"><span class="new-dot" aria-hidden="true"></span> 重新想象 iPhone 的另一面</p>
           <h1 id="hero-title">把更多，<span>展开来。</span></h1>
           <p class="hero__intro">口袋里的轻巧。展开后的尽兴。<br>让熟悉的日常，多一种打开方式。</p>
-          <div class="hero__actions"><a class="button" href="#highlights">一起展开看看 <span aria-hidden="true">↓</span></a>
-          <a class="text-link" href="#design">发现设计之美 <span aria-hidden="true">↗</span></a></div>
+          <div class="hero__actions"><a class="button" href="#highlights">一起展开看看 <img class="ui-icon" src="assets/icons/arrow-down-white.svg" width="20" height="20" alt="" aria-hidden="true"></a>
+          <a class="text-link" href="#design">发现设计之美 <img class="ui-icon" src="assets/icons/arrow-up-right-blue.svg" width="20" height="20" alt="" aria-hidden="true"></a></div>
         </div>
         <div class="hero__visual">
           <img
@@ -56,13 +63,12 @@
             fetchpriority="high"
           >
         </div>
-        <div class="hero__caption shell"><span>小小一次展开。大大不同的一天。</span><a href="#highlights" aria-label="向下浏览产品亮点"><span aria-hidden="true">↓</span></a></div>
+        <div class="hero__caption shell"><span>小小一次展开。大大不同的一天。</span><a href="#highlights" aria-label="向下浏览产品亮点"><img class="ui-icon" src="assets/icons/arrow-down.svg" width="20" height="20" alt="" aria-hidden="true"></a></div>
       </section>
       <section class="section section--soft" id="highlights" aria-labelledby="highlights-title">
         <div class="shell">
           <div class="section-heading" data-reveal>
             <div>
-              <p class="eyebrow">A LITTLE FOLD. A LOT MORE.</p>
               <h2 id="highlights-title">一点折叠。<br>很多可能。</h2>
             </div>
             <p class="section-heading__note">不只换个形态。<br>也换个看世界的角度。</p>
@@ -95,7 +101,7 @@
               <div class="highlight-card__copy">
                 <span class="card-index">02 / 影像</span>
                 <h3>每一面，<br>都有好画面。</h3>
-                <a class="circle-link" href="#camera" aria-label="探索摄影体验">↗</a>
+                <a class="circle-link" href="#camera" aria-label="探索摄影体验"><img class="ui-icon" src="assets/icons/arrow-up-right.svg" width="20" height="20" alt="" aria-hidden="true"></a>
               </div>
             </article>
             <article class="highlight-card highlight-card--chip" data-reveal>
@@ -110,7 +116,6 @@
       <section class="section design-section" id="design" aria-labelledby="design-title">
         <div class="shell">
           <div class="center-heading" data-reveal>
-            <p class="eyebrow">DESIGNED TO OPEN UP</p>
             <h2 id="design-title">每一面，<br>都值得细看。</h2>
             <p>两种配色。不同姿态。<br>把简洁的美，放在每一次开合之间。</p>
           </div>
@@ -162,7 +167,6 @@
         <div class="shell">
           <div class="section-heading" data-reveal>
             <div>
-              <p class="eyebrow">YOUR DAY. UNFOLDED.</p>
               <h2 id="experience-title">换个姿态，<br>日常就有新意。</h2>
             </div>
             <p class="section-heading__note">左右滑动，找到你的打开方式。<br>也可以使用下方箭头。</p>
@@ -268,11 +272,14 @@
                   <button type="button" data-slide="2" aria-label="第 3 项：桌面待机" aria-controls="experience-track" aria-current="false"><span class="carousel-progress-track" aria-hidden="true"><span class="carousel-progress-fill"></span></span></button>
                   <button type="button" data-slide="3" aria-label="第 4 项：随手开工" aria-controls="experience-track" aria-current="false"><span class="carousel-progress-track" aria-hidden="true"><span class="carousel-progress-fill"></span></span></button>
                 </div>
-                <button class="icon-button carousel-toggle" id="carousel-toggle" type="button" aria-label="暂停自动播放" aria-controls="experience-track" aria-pressed="true" hidden><span aria-hidden="true">Ⅱ</span></button>
+                <button class="icon-button carousel-toggle" id="carousel-toggle" type="button" aria-label="暂停自动播放" aria-controls="experience-track" aria-pressed="true" hidden>
+                  <img class="ui-icon pause-icon" src="assets/icons/pause.svg" width="20" height="20" alt="" aria-hidden="true">
+                  <img class="ui-icon play-icon" src="assets/icons/play.svg" width="20" height="20" alt="" aria-hidden="true" hidden>
+                </button>
               </div>
               <div class="carousel-arrows">
-                <button class="icon-button" id="slide-prev" type="button" aria-label="上一个场景" aria-controls="experience-track" disabled>←</button>
-                <button class="icon-button" id="slide-next" type="button" aria-label="下一个场景" aria-controls="experience-track">→</button>
+                <button class="icon-button" id="slide-prev" type="button" aria-label="上一个场景" aria-controls="experience-track" disabled><img class="ui-icon" src="assets/icons/arrow-left.svg" width="20" height="20" alt="" aria-hidden="true"></button>
+                <button class="icon-button" id="slide-next" type="button" aria-label="下一个场景" aria-controls="experience-track"><img class="ui-icon" src="assets/icons/arrow-right.svg" width="20" height="20" alt="" aria-hidden="true"></button>
               </div>
             </div>
           </div>
@@ -282,7 +289,6 @@
         <div class="shell">
           <div class="section-heading" data-reveal>
             <div>
-              <p class="eyebrow">A NEW POINT OF VIEW</p>
               <h2 id="camera-title">镜头的另一面，<br>也是好风景。</h2>
             </div>
             <p class="section-heading__note">从被拍摄，到一起参与。<br>让画面里的每个人，都更自在。</p>
@@ -323,7 +329,6 @@
       <section class="performance-section" aria-labelledby="performance-title">
         <div class="shell performance-layout">
           <div data-reveal>
-            <p class="eyebrow">POWER FOR YOUR POSSIBILITIES</p>
             <h2 id="performance-title">尽兴，<br>有实力撑着。</h2>
             <p>从多任务到沉浸游戏，<br>A20 Pro 让打开的可能，更进一步。</p>
             <div class="performance-specs">
@@ -345,45 +350,44 @@
       <section class="section faq-section" id="faq" aria-labelledby="faq-title">
         <div class="shell faq-layout">
           <div class="faq-intro" data-reveal>
-            <p class="eyebrow">A FEW MORE THINGS</p>
             <h2 id="faq-title">还有一些，<br>你可能想知道。</h2>
             <p>关于展开后的体验，<br>从这里继续了解。</p>
-            <a class="text-link" href="https://www.apple.com.cn/iphone-duo/" target="_blank" rel="noopener noreferrer">前往 Apple 查看完整介绍 ↗</a>
+            <a class="text-link" href="https://www.apple.com.cn/iphone-duo/" target="_blank" rel="noopener noreferrer">前往 Apple 查看完整介绍 <img class="ui-icon" src="assets/icons/arrow-up-right-blue.svg" width="20" height="20" alt="" aria-hidden="true"></a>
           </div>
           <div class="faq-content" data-reveal>
             <label class="search-label" for="faq-search">搜索常见问题</label>
             <div class="faq-search">
-              <span aria-hidden="true">⌕</span>
+              <img class="ui-icon" src="assets/icons/search.svg" width="20" height="20" alt="" aria-hidden="true">
               <input id="faq-search" type="search" placeholder="试试“配色”或“屏幕”" autocomplete="off">
             </div>
             <p class="search-status" id="faq-status" aria-live="polite">共 5 个问题</p>
             <div class="faq-list">
               <details>
-                <summary>展开之后，可以做些什么？<span aria-hidden="true"></span></summary>
+                <summary>展开之后，可以做些什么？<span class="faq-toggle-icon" aria-hidden="true"><img class="ui-icon faq-icon-plus" src="assets/icons/plus.svg" width="20" height="20" alt="" aria-hidden="true"><img class="ui-icon faq-icon-minus" src="assets/icons/minus.svg" width="20" height="20" alt="" aria-hidden="true"></span></summary>
                 <div class="faq-answer">
                   <p>宽阔的内屏适合阅读、观看视频和处理日常事务。支持分屏浏览的应用，还能让两份内容并排呈现。具体功能和可用性请以 Apple 官方介绍为准。</p>
                 </div>
               </details>
               <details>
-                <summary>iPhone Duo 有哪些配色？<span aria-hidden="true"></span></summary>
+                <summary>iPhone Duo 有哪些配色？<span class="faq-toggle-icon" aria-hidden="true"><img class="ui-icon faq-icon-plus" src="assets/icons/plus.svg" width="20" height="20" alt="" aria-hidden="true"><img class="ui-icon faq-icon-minus" src="assets/icons/minus.svg" width="20" height="20" alt="" aria-hidden="true"></span></summary>
                 <div class="faq-answer">
                   <p>本页展示夜空色与星光白色。可以在上方“每一面，都值得细看”区域点击配色按钮，对比两种外观。</p>
                 </div>
               </details>
               <details>
-                <summary>拍照时，外面的屏幕有什么用？<span aria-hidden="true"></span></summary>
+                <summary>拍照时，外面的屏幕有什么用？<span class="faq-toggle-icon" aria-hidden="true"><img class="ui-icon faq-icon-plus" src="assets/icons/plus.svg" width="20" height="20" alt="" aria-hidden="true"><img class="ui-icon faq-icon-minus" src="assets/icons/minus.svg" width="20" height="20" alt="" aria-hidden="true"></span></summary>
                 <div class="faq-answer">
                   <p>Duo 双屏预览能让被拍摄的人在外屏查看画面，调整姿势和构图。镜头两边的人，可以一起参与拍摄。</p>
                 </div>
               </details>
               <details>
-                <summary>展开后的屏幕有多大？<span aria-hidden="true"></span></summary>
+                <summary>展开后的屏幕有多大？<span class="faq-toggle-icon" aria-hidden="true"><img class="ui-icon faq-icon-plus" src="assets/icons/plus.svg" width="20" height="20" alt="" aria-hidden="true"><img class="ui-icon faq-icon-minus" src="assets/icons/minus.svg" width="20" height="20" alt="" aria-hidden="true"></span></summary>
                 <div class="faq-answer">
                   <p>iPhone Duo 的内屏为 7.6 英寸超视网膜 XDR 显示屏。屏幕尺寸按对角线测量，实际可视区域会受到圆角等设计影响；详细说明请参阅官方技术规格。</p>
                 </div>
               </details>
               <details>
-                <summary>在哪里查看完整参数与购买信息？<span aria-hidden="true"></span></summary>
+                <summary>在哪里查看完整参数与购买信息？<span class="faq-toggle-icon" aria-hidden="true"><img class="ui-icon faq-icon-plus" src="assets/icons/plus.svg" width="20" height="20" alt="" aria-hidden="true"><img class="ui-icon faq-icon-minus" src="assets/icons/minus.svg" width="20" height="20" alt="" aria-hidden="true"></span></summary>
                 <div class="faq-answer">
                   <p>本页是独立设计展示作品。完整的技术规格、功能可用性、售价与购买信息，请访问 <a href="https://www.apple.com.cn/iphone-duo/" target="_blank" rel="noopener noreferrer">Apple 官方产品页面</a>。</p>
                 </div>
@@ -395,18 +399,15 @@
       </section>
       <section class="closing-section" aria-labelledby="closing-title">
         <div class="shell" data-reveal>
-          <p class="eyebrow">THERE IS MORE TO OPEN UP</p>
           <h2 id="closing-title">下一种可能，<br>由你展开。</h2>
-          <a class="button" href="https://www.apple.com.cn/iphone-duo/" target="_blank" rel="noopener noreferrer">前往 Apple 了解更多 <span aria-hidden="true">↗</span></a>
+          <a class="button" href="https://www.apple.com.cn/iphone-duo/" target="_blank" rel="noopener noreferrer">前往 Apple 了解更多 <img class="ui-icon" src="assets/icons/arrow-up-right-white.svg" width="20" height="20" alt="" aria-hidden="true"></a>
         </div>
       </section>
     </main>
     <footer class="site-footer">
-      <div class="shell">
-        <div class="footer-top"><a class="wordmark" href="#top" aria-label="返回 Duo 页面顶部">Duo<span aria-hidden="true">.</span></a><a href="#top">回到顶部 ↑</a></div>
-        <p>独立前端展示作品，非 Apple 官方网站。图片来自 Apple 官网，版权归原权利人所有。</p>
-        <p>产品资料参考于 2026 年 11 月 1 日。功能、规格和购买信息以 <a href="https://www.apple.com.cn/iphone-duo/" target="_blank" rel="noopener noreferrer">Apple 官网</a>为准。</p>
-        <div class="footer-bottom"><span>Designed to unfold.</span><span>为大屏而设计，也为你的手机。</span></div>
+      <div class="shell footer-top">
+        <a class="wordmark" href="#top" aria-label="返回 Duo 页面顶部">Duo<span aria-hidden="true">.</span></a>
+        <a class="footer-back" href="#top">回到顶部 <img class="ui-icon" src="assets/icons/arrow-up.svg" width="20" height="20" alt="" aria-hidden="true"></a>
       </div>
     </footer>
   </body>
