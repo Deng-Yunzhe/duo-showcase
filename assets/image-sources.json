@@ -1,0 +1,126 @@
+{
+  "source_page": "https://www.apple.com.cn/iphone-duo/",
+  "retrieved_at": "2026-11-01",
+  "credit": "Apple。图片与商标权利归各自权利人所有。",
+  "images": [
+    {
+      "file": "assets/images/camera-680.webp",
+      "source_url": "https://www.apple.com.cn/iphone-duo/images/overview/camera/hero_right__gk9rwhz4kdqq_large_2x.webp",
+      "width": 680,
+      "height": 1586,
+      "resized": true
+    },
+    {
+      "file": "assets/images/camera-photo.jpg",
+      "source_url": "https://www.apple.com.cn/v/iphone-duo/e/images/overview/camera/photonic__dghocclrer2a_large_2x.jpg",
+      "width": 1392,
+      "height": 904,
+      "resized": false
+    },
+    {
+      "file": "assets/images/finish-dark-1600.webp",
+      "source_url": "https://www.apple.com.cn/iphone-duo/images/overview/design/design_hero_static__dq90dw3yqa4i_large_2x.webp",
+      "width": 1600,
+      "height": 1024,
+      "resized": true
+    },
+    {
+      "file": "assets/images/finish-dark-960.webp",
+      "source_url": "https://www.apple.com.cn/iphone-duo/images/overview/design/design_hero_static__dq90dw3yqa4i_large_2x.webp",
+      "width": 960,
+      "height": 614,
+      "resized": true
+    },
+    {
+      "file": "assets/images/finish-dark.webp",
+      "source_url": "https://www.apple.com.cn/iphone-duo/images/overview/design/design_hero_static__dq90dw3yqa4i_large_2x.webp",
+      "width": 2544,
+      "height": 1628,
+      "resized": false
+    },
+    {
+      "file": "assets/images/finish-light-1600.webp",
+      "source_url": "https://www.apple.com.cn/iphone-duo/images/overview/design/design_hero__gczn1e74mwa6_large_2x.webp",
+      "width": 1600,
+      "height": 1024,
+      "resized": true
+    },
+    {
+      "file": "assets/images/finish-light-960.webp",
+      "source_url": "https://www.apple.com.cn/iphone-duo/images/overview/design/design_hero__gczn1e74mwa6_large_2x.webp",
+      "width": 960,
+      "height": 614,
+      "resized": true
+    },
+    {
+      "file": "assets/images/finish-light.webp",
+      "source_url": "https://www.apple.com.cn/iphone-duo/images/overview/design/design_hero__gczn1e74mwa6_large_2x.webp",
+      "width": 2544,
+      "height": 1628,
+      "resized": false
+    },
+    {
+      "file": "assets/images/hero-1280.webp",
+      "source_url": "https://www.apple.com.cn/iphone-duo/images/overview/media-hero/hero__dbnzxlb3ia2q_large_2x.webp",
+      "width": 1280,
+      "height": 848,
+      "resized": true
+    },
+    {
+      "file": "assets/images/hero-960.webp",
+      "source_url": "https://www.apple.com.cn/iphone-duo/images/overview/media-hero/hero__dbnzxlb3ia2q_large_2x.webp",
+      "width": 960,
+      "height": 636,
+      "resized": true
+    },
+    {
+      "file": "assets/images/hero.webp",
+      "source_url": "https://www.apple.com.cn/iphone-duo/images/overview/media-hero/hero__dbnzxlb3ia2q_large_2x.webp",
+      "width": 1932,
+      "height": 1280,
+      "resized": false
+    },
+    {
+      "file": "assets/images/performance-1200.webp",
+      "source_url": "https://www.apple.com.cn/iphone-duo/images/overview/product-stories/performance/hero__dbnzxlb3ia2q_xlarge.webp",
+      "width": 1200,
+      "height": 622,
+      "resized": true
+    },
+    {
+      "file": "assets/images/scene-camera-960.webp",
+      "source_url": "https://www.apple.com.cn/v/iphone-duo/e/images/overview/camera/duo-preview_endframe__gmc0ch1ssfyy_large_2x.jpg",
+      "width": 960,
+      "height": 542,
+      "resized": true
+    },
+    {
+      "file": "assets/images/scene-laptop-960.webp",
+      "source_url": "https://www.apple.com.cn/v/iphone-duo/e/images/overview/product-viewer/laptop__c7kl6vmsqd6q_large_2x.jpg",
+      "width": 960,
+      "height": 507,
+      "resized": true
+    },
+    {
+      "file": "assets/images/scene-multitask-960.webp",
+      "source_url": "https://www.apple.com.cn/iphone-duo/images/overview/product-viewer/landscape__f7x2oe1oxemy_large_2x.webp",
+      "width": 960,
+      "height": 507,
+      "resized": true
+    },
+    {
+      "file": "assets/images/scene-open-960.webp",
+      "source_url": "https://www.apple.com.cn/iphone-duo/images/overview/product-viewer/foldable__iybtpzlhgj6u_large_2x.webp",
+      "width": 960,
+      "height": 507,
+      "resized": true
+    },
+    {
+      "file": "assets/images/scene-standby-960.webp",
+      "source_url": "https://www.apple.com.cn/iphone-duo/images/overview/product-viewer/tent__68ysumotbs2m_large_2x.webp",
+      "width": 960,
+      "height": 507,
+      "resized": true
+    }
+  ]
+}
