@@ -18,18 +18,20 @@ python3 -m http.server 8080
 duo-showcase/
 ├── index.html                 页面内容
 ├── styles.css                 布局、动画和响应式样式
-├── script.js                  导航、轮播、配色和搜索
+├── script.js                  首屏视频、导航、轮播、配色和搜索
 ├── assets/
 │   ├── favicon.svg
 │   ├── image-sources.json     图片来源记录
 │   ├── icons/                本地 SVG 图标、来源及许可证
-│   └── images/
+│   ├── images/
+│   └── videos/                首屏手机展开视频
 ├── .gitignore
 └── .nojekyll
 ```
 
 ## 交互
 
+- 首屏手机展开视频在打开页面后自动播放一次，约 3 秒后停在最后一帧；滚动回来不会重播。减少动态效果、没有 JavaScript 或播放失败时显示原首屏图。
 - 导航随当前阅读章节更新；手机菜单带展开、收起和淡入淡出过渡。
 - 配色按钮切换图片，使用透明度过渡。
 - 场景轮播支持箭头、进度按钮、键盘和触摸滑动。进度条每 5 秒走完一次，然后切换下一项。
@@ -41,7 +43,7 @@ duo-showcase/
 
 使用 HTML、CSS 和原生 JavaScript。布局以 Grid、Flex 和媒体查询为主，入场动画使用 `IntersectionObserver`，轮播滚动使用 CSS Scroll Snap。
 
-首屏图片设置较高加载优先级，其他内容图片按需加载；部分图片通过 `srcset` 提供不同尺寸。图片和样式均使用相对路径，支持放在站点子目录中。
+首屏使用原生 `video`，由 `initHeroVideo` 启动一次播放，不需要动画库。其他内容图片按需加载，部分图片通过 `srcset` 提供不同尺寸。图片、视频和样式均使用相对路径，支持放在站点子目录中。
 
 ## GitHub Pages
 

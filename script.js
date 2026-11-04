@@ -106,6 +106,35 @@ function initActiveNavigation() {
   window.addEventListener("resize", debounce(observeSections, 180));
 }
 
+// 首屏视频：打开后播放一次，不设置 loop，结束时自然保留最后一帧。
+function initHeroVideo() {
+  const video = document.querySelector(".hero__video");
+  if (!video) return;
+  const reducedMotion = window.matchMedia("(prefers-reduced-motion: reduce)");
+  if (reducedMotion.matches) return; // 保留原图，也不下载视频。
+
+  const stillPoster = video.poster;
+  let fallbackShown = false;
+  function showStill() {
+    if (fallbackShown) return;
+    fallbackShown = true;
+    video.pause();
+    video.removeAttribute("src");
+    video.poster = stillPoster;
+    video.load();
+  }
+
+  video.addEventListener("error", showStill, { once: true });
+  video.poster = video.dataset.startPoster;
+  video.src = video.dataset.videoSrc;
+  video.muted = true;
+  const playback = video.play();
+  if (playback) playback.catch(showStill); // 自动播放受限时退回原图。
+  reducedMotion.addEventListener("change", function (event) {
+    if (event.matches) showStill();
+  });
+}
+
 // 内容进入视口后播放一次入场动画。
 function initRevealAnimations() {
   const reducedMotion = window.matchMedia("(prefers-reduced-motion: reduce)");
@@ -355,6 +384,7 @@ function initFaqSearch() {
 
 initMobileMenu();
 initActiveNavigation();
+initHeroVideo();
 initRevealAnimations();
 initCarousel();
 initFinishPicker();

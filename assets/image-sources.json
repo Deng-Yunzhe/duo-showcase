@@ -122,5 +122,17 @@
       "height": 507,
       "resized": true
     }
-  ]
+  ],
+  "hero_video": {
+    "updated_at": "2026-11-04",
+    "source_archive": "iphone-duo-clone.zip（用户提供）",
+    "file": "assets/videos/hero.mp4",
+    "archive_path": "iphone-duo-clone/assets/videos/media-hero-video-large.mp4",
+    "width": 966,
+    "height": 640,
+    "duration_seconds": 3.033008,
+    "sha256": "186174812b9ec93a81f411b76409b4e038293a1d13e496ca149fa83cf9ecca5e",
+    "starting_frame": "assets/images/hero-start.jpg",
+    "starting_frame_archive_path": "iphone-duo-clone/assets/images/media-hero/hero_startframe__fcol1x2us8i2_large_2x.jpg"
+  }
 }

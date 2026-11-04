@@ -53,15 +53,20 @@
           <a class="text-link" href="#design">发现设计之美 <img class="ui-icon" src="assets/icons/arrow-up-right-blue.svg" width="20" height="20" alt="" aria-hidden="true"></a></div>
         </div>
         <div class="hero__visual">
-          <img
-            src="assets/images/hero.webp"
-            srcset="assets/images/hero-960.webp 960w, assets/images/hero-1280.webp 1280w, assets/images/hero.webp 1932w"
-            sizes="(max-width: 734px) 110vw, 1000px"
+          <video
+            class="hero__video"
             width="1932"
             height="1280"
-            alt="双手握着展开的 iPhone Duo，宽阔内屏呈现照片、小组件和常用应用"
-            fetchpriority="high"
+            muted
+            playsinline
+            preload="none"
+            poster="assets/images/hero.webp"
+            data-video-src="assets/videos/hero.mp4"
+            data-start-poster="assets/images/hero-start.jpg"
+            aria-label="双手握着 iPhone Duo，机身从闭合旋转至展开，展示宽阔内屏"
           >
+            <img src="assets/images/hero.webp" width="1932" height="1280" alt="双手握着展开的 iPhone Duo，宽阔内屏呈现照片、小组件和常用应用">
+          </video>
         </div>
         <div class="hero__caption shell"><span>小小一次展开。大大不同的一天。</span><a href="#highlights" aria-label="向下浏览产品亮点"><img class="ui-icon" src="assets/icons/arrow-down.svg" width="20" height="20" alt="" aria-hidden="true"></a></div>
       </section>
