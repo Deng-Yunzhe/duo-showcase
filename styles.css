@@ -1162,6 +1162,12 @@ h3 {
   transition: opacity .3s ease;
 }
 
+/* 文字进入视口时上浮；图片继续使用独立的加载淡入。 */
+.reveal-enabled [data-reveal="rise"] {
+  transform: translateY(24px);
+  transition: opacity .65s ease, transform .65s cubic-bezier(.22, 1, .36, 1);
+}
+
 .reveal-enabled [data-reveal].is-visible {
   opacity: 1;
   transform: translateY(0);
