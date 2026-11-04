@@ -423,8 +423,9 @@ h3 {
 }
 
 .hero__visual {
+  position: relative;
   width: min(1000px, 94%);
-  margin: 45px auto 0;
+  margin: 20px auto 0;
 }
 
 .hero__visual img {
@@ -435,6 +436,29 @@ h3 {
   display: block;
   width: 100%;
   height: auto;
+  max-height: max(260px, calc(100vh - 340px));
+  max-height: max(260px, calc(100svh - 340px));
+  object-fit: contain;
+}
+
+.hero__details {
+  margin-top: 20px;
+  text-align: center;
+}
+
+.hero__details .hero__intro {
+  margin-top: 0;
+}
+
+.hero__play {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+}
+
+.hero__play[hidden] {
+  display: none;
 }
 
 .hero__caption {
@@ -1135,8 +1159,7 @@ h3 {
 /* 脚本启用后才隐藏待入场内容，脚本未加载时页面仍然可读。 */
 .reveal-enabled [data-reveal] {
   opacity: 0;
-  transform: translateY(28px);
-  transition: opacity .75s ease, transform .75s cubic-bezier(.22,.61,.36,1);
+  transition: opacity .3s ease;
 }
 
 .reveal-enabled [data-reveal].is-visible {
@@ -1165,6 +1188,15 @@ h3 {
 
 }
 
+/* 图片先解码再柔和显示，原有宽高和容器比例负责占位。 */
+.media-enhanced img[loading]:not(.finish-image) {
+  transition: opacity .24s ease;
+}
+
+.media-enhanced img[loading].is-image-loading {
+  opacity: 0;
+}
+
 /* 平板 */
 @media (max-width: 1068px) {
   :root {
@@ -1182,7 +1214,9 @@ h3 {
   .highlight-card--wide {
     grid-column: 1 / -1;
     min-height: 390px;
-    flex-direction: row;
+    display: grid;
+    grid-template-columns: minmax(0, .9fr) minmax(0, 1.1fr);
+    padding-right: 24px;
     align-items: center;
   }
 
@@ -1191,8 +1225,10 @@ h3 {
   }
 
   .highlight-card--wide img {
-    width: 65%;
-    margin: 0 0 0 -6%;
+    width: 100%;
+    max-width: 100%;
+    min-width: 0;
+    margin: 0;
   }
 
   .highlight-card--photo, .highlight-card--chip {
@@ -1205,8 +1241,8 @@ h3 {
   }
 
   .slide {
-    grid-template-columns: 1fr 1.2fr;
-    padding: 38px 0 38px 36px;
+    grid-template-columns: minmax(0, 1fr) minmax(0, 1.2fr);
+    padding: 38px 24px 38px 36px;
     min-height: 400px;
   }
 
@@ -1321,7 +1357,7 @@ h3 {
 
   .hero__visual {
     width: 110%;
-    margin-top: 34px;
+    margin-top: 20px;
     margin-left: -5%;
   }
 
@@ -1358,9 +1394,11 @@ h3 {
 
   .highlight-card--wide {
     grid-column: auto;
+    display: flex;
     flex-direction: column;
     align-items: stretch;
     min-height: 415px;
+    padding-right: 0;
   }
 
   .highlight-card--wide .highlight-card__copy {
@@ -1368,9 +1406,9 @@ h3 {
   }
 
   .highlight-card--wide img {
-    width: 110%;
-    max-width: none;
-    margin: auto 0 10px -5%;
+    width: calc(100% - 32px);
+    max-width: 100%;
+    margin: auto 16px 16px;
   }
 
   .highlight-card__copy, .highlight-card--chip {
@@ -1453,7 +1491,8 @@ h3 {
 
   .slide > img {
     align-self: center;
-    margin-top: 18px;
+    width: calc(100% - 32px);
+    margin: 18px 16px 0;
   }
 
   .carousel-controls {
