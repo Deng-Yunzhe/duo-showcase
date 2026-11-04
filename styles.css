@@ -431,6 +431,12 @@ h3 {
   width: 100%;
 }
 
+.hero__video {
+  display: block;
+  width: 100%;
+  height: auto;
+}
+
 .hero__caption {
   display: flex;
   justify-content: space-between;
