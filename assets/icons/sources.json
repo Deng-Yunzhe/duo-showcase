@@ -10,12 +10,16 @@
     {
       "file": "play.svg",
       "source_url": "https://raw.githubusercontent.com/lucide-icons/lucide/1980e3d59b0fa1a2aeb566d5902b25ee98204001/icons/play.svg",
-      "color": "#1d1d1f"
+      "color": "#1d1d1f",
+      "fill": "#1d1d1f",
+      "stroke_width": 1
     },
     {
       "file": "pause.svg",
       "source_url": "https://raw.githubusercontent.com/lucide-icons/lucide/1980e3d59b0fa1a2aeb566d5902b25ee98204001/icons/pause.svg",
-      "color": "#1d1d1f"
+      "color": "#1d1d1f",
+      "fill": "#1d1d1f",
+      "stroke_width": 1
     },
     {
       "file": "arrow-left.svg",
