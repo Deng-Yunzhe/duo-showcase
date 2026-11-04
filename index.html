@@ -7,8 +7,32 @@
     <meta name="theme-color" content="#ffffff">
     <title>Duo · 把更多，展开来</title>
     <link rel="icon" href="assets/favicon.svg" type="image/svg+xml">
-    <link rel="stylesheet" href="styles.css">
-    <script src="script.js" defer></script>
+    <!-- 刷新时从首屏重新展示；普通章节跳转和首次打开锚点链接仍正常工作。 -->
+    <script>
+      (function () {
+        var navigation = performance.getEntriesByType && performance.getEntriesByType("navigation")[0];
+        var reloading = navigation ? navigation.type === "reload" : performance.navigation && performance.navigation.type === 1;
+        if (!reloading) return;
+        var restoration = history.scrollRestoration;
+        if ("scrollRestoration" in history) history.scrollRestoration = "manual";
+        if (location.hash) history.replaceState(history.state, "", location.href.split("#")[0]);
+        var root = document.documentElement;
+        var behavior = root.style.scrollBehavior;
+        root.style.scrollBehavior = "auto";
+        window.scrollTo(0, 0);
+        window.addEventListener("pageshow", function () {
+          window.scrollTo(0, 0);
+          requestAnimationFrame(function () {
+            window.scrollTo(0, 0);
+            root.style.scrollBehavior = behavior;
+            if ("scrollRestoration" in history) history.scrollRestoration = restoration;
+          });
+        }, { once: true });
+      })();
+    </script>
+    <link rel="preload" as="image" href="assets/images/hero-poster.webp" fetchpriority="high">
+    <link rel="stylesheet" href="styles.css?v=d6e614caa8">
+    <script src="script.js?v=51be1d8c4a" defer></script>
   </head>
   <body id="top">
     <a class="skip-link" href="#main">跳到主要内容</a>
@@ -48,9 +72,6 @@
         <div class="hero__copy shell">
           <p class="hero__tagline"><span class="new-dot" aria-hidden="true"></span> 重新想象 iPhone 的另一面</p>
           <h1 id="hero-title">把更多，<span>展开来。</span></h1>
-          <p class="hero__intro">口袋里的轻巧。展开后的尽兴。<br>让熟悉的日常，多一种打开方式。</p>
-          <div class="hero__actions"><a class="button" href="#highlights">一起展开看看 <img class="ui-icon" src="assets/icons/arrow-down-white.svg" width="20" height="20" alt="" aria-hidden="true"></a>
-          <a class="text-link" href="#design">发现设计之美 <img class="ui-icon" src="assets/icons/arrow-up-right-blue.svg" width="20" height="20" alt="" aria-hidden="true"></a></div>
         </div>
         <div class="hero__visual">
           <video
@@ -59,14 +80,20 @@
             height="1280"
             muted
             playsinline
-            preload="none"
-            poster="assets/images/hero.webp"
-            data-video-src="assets/videos/hero.mp4"
-            data-start-poster="assets/images/hero-start.jpg"
+            preload="auto"
+            poster="assets/images/hero-poster.webp"
+            data-video-src="assets/videos/hero-optimized.mp4"
+            data-still-poster="assets/images/hero-960.webp"
             aria-label="双手握着 iPhone Duo，机身从闭合旋转至展开，展示宽阔内屏"
           >
-            <img src="assets/images/hero.webp" width="1932" height="1280" alt="双手握着展开的 iPhone Duo，宽阔内屏呈现照片、小组件和常用应用">
+            iPhone Duo 从闭合旋转至展开，展示宽阔内屏。
           </video>
+          <button class="button hero__play" type="button" hidden>播放展开动画</button>
+        </div>
+        <div class="hero__details shell">
+          <p class="hero__intro">口袋里的轻巧。展开后的尽兴。<br>让熟悉的日常，多一种打开方式。</p>
+          <div class="hero__actions"><a class="button" href="#highlights">一起展开看看 <img class="ui-icon" src="assets/icons/arrow-down-white.svg" width="20" height="20" alt="" aria-hidden="true"></a>
+          <a class="text-link" href="#design">发现设计之美 <img class="ui-icon" src="assets/icons/arrow-up-right-blue.svg" width="20" height="20" alt="" aria-hidden="true"></a></div>
         </div>
         <div class="hero__caption shell"><span>小小一次展开。大大不同的一天。</span><a href="#highlights" aria-label="向下浏览产品亮点"><img class="ui-icon" src="assets/icons/arrow-down.svg" width="20" height="20" alt="" aria-hidden="true"></a></div>
       </section>
@@ -128,8 +155,8 @@
             <img
               class="finish-image is-active"
               data-finish-image="dark"
-              src="assets/images/finish-dark.webp"
-              srcset="assets/images/finish-dark-960.webp 960w, assets/images/finish-dark-1600.webp 1600w, assets/images/finish-dark.webp 2544w"
+              src="assets/images/finish-dark-1600.webp"
+              srcset="assets/images/finish-dark-960.webp 960w, assets/images/finish-dark-1600.webp 1600w, assets/images/finish-dark-2240.webp 2240w"
               sizes="(max-width: 734px) 100vw, 1120px"
               width="2544"
               height="1628"
@@ -140,8 +167,8 @@
             <img
               class="finish-image"
               data-finish-image="light"
-              src="assets/images/finish-light.webp"
-              srcset="assets/images/finish-light-960.webp 960w, assets/images/finish-light-1600.webp 1600w, assets/images/finish-light.webp 2544w"
+              src="assets/images/finish-light-1600.webp"
+              srcset="assets/images/finish-light-960.webp 960w, assets/images/finish-light-1600.webp 1600w, assets/images/finish-light-2240.webp 2240w"
               sizes="(max-width: 734px) 100vw, 1120px"
               width="2544"
               height="1628"
@@ -301,7 +328,9 @@
           <div class="camera-grid">
             <figure class="photo-story" data-reveal>
               <img
-                src="assets/images/camera-photo.jpg"
+                src="assets/images/camera-photo.webp"
+                srcset="assets/images/camera-photo-800.webp 800w, assets/images/camera-photo.webp 1392w"
+                sizes="(max-width: 734px) 100vw, (max-width: 1068px) 55vw, 700px"
                 width="1392"
                 height="904"
                 alt="橙色建筑前的人像照片，展现自然光影与建筑色彩"

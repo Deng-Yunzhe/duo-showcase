@@ -134,5 +134,40 @@
     "sha256": "186174812b9ec93a81f411b76409b4e038293a1d13e496ca149fa83cf9ecca5e",
     "starting_frame": "assets/images/hero-start.jpg",
     "starting_frame_archive_path": "iphone-duo-clone/assets/images/media-hero/hero_startframe__fcol1x2us8i2_large_2x.jpg"
+  },
+  "loading_optimization": {
+    "updated_at": "2026-11-04",
+    "derived_assets": [
+      {
+        "file": "assets/videos/hero-optimized.mp4",
+        "source_file": "assets/videos/hero.mp4",
+        "bytes": 245993
+      },
+      {
+        "file": "assets/images/hero-poster.webp",
+        "source_file": "assets/images/hero-start.jpg",
+        "bytes": 22796
+      },
+      {
+        "file": "assets/images/finish-dark-2240.webp",
+        "source_file": "assets/images/finish-dark.webp",
+        "bytes": 159652
+      },
+      {
+        "file": "assets/images/finish-light-2240.webp",
+        "source_file": "assets/images/finish-light.webp",
+        "bytes": 174312
+      },
+      {
+        "file": "assets/images/camera-photo.webp",
+        "source_file": "assets/images/camera-photo.jpg",
+        "bytes": 133324
+      },
+      {
+        "file": "assets/images/camera-photo-800.webp",
+        "source_file": "assets/images/camera-photo.jpg",
+        "bytes": 44986
+      }
+    ]
   }
 }

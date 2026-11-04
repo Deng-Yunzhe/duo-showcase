@@ -106,32 +106,108 @@ function initActiveNavigation() {
   window.addEventListener("resize", debounce(observeSections, 180));
 }
 
-// 首屏视频：打开后播放一次，不设置 loop，结束时自然保留最后一帧。
+// 首屏视频：使用轻量封面和压缩后的 H.264 视频，播放一次后自然停住。
 function initHeroVideo() {
   const video = document.querySelector(".hero__video");
   if (!video) return;
+  const playButton = document.querySelector(".hero__play");
   const reducedMotion = window.matchMedia("(prefers-reduced-motion: reduce)");
-  if (reducedMotion.matches) return; // 保留原图，也不下载视频。
+  const stillPoster = video.dataset.stillPoster;
+  let failed = false;
 
-  const stillPoster = video.poster;
-  let fallbackShown = false;
   function showStill() {
-    if (fallbackShown) return;
-    fallbackShown = true;
+    if (failed) return;
+    failed = true;
     video.pause();
     video.removeAttribute("src");
     video.poster = stillPoster;
     video.load();
+    playButton.hidden = true;
   }
 
+  function play() {
+    if (failed || reducedMotion.matches) return;
+    const playback = video.play();
+    if (playback) playback.catch(function (error) {
+      if (failed) return;
+      if (error.name === "NotAllowedError") {
+        playButton.hidden = false; // Safari 限制自动播放时，允许用户点击播放。
+      } else {
+        showStill();
+      }
+    });
+  }
+
+  if (reducedMotion.matches) {
+    video.poster = stillPoster;
+    return;
+  }
   video.addEventListener("error", showStill, { once: true });
-  video.poster = video.dataset.startPoster;
-  video.src = video.dataset.videoSrc;
+  video.addEventListener("playing", function () { playButton.hidden = true; });
+  playButton.addEventListener("click", play);
   video.muted = true;
-  const playback = video.play();
-  if (playback) playback.catch(showStill); // 自动播放受限时退回原图。
+  video.defaultMuted = true;
+  video.playsInline = true;
+  video.src = video.dataset.videoSrc;
+  play();
   reducedMotion.addEventListener("change", function (event) {
     if (event.matches) showStill();
+  });
+}
+
+// 提前加载和轮播切换共用同一个解码结果，避免重复等待。
+const imagePreparation = new WeakMap();
+function prepareImage(image) {
+  if (!image) return Promise.resolve();
+  if (imagePreparation.has(image)) return imagePreparation.get(image);
+  const prepared = new Promise(function (resolve) {
+    function loaded() {
+      image.removeEventListener("load", loaded);
+      image.removeEventListener("error", loaded);
+      resolve();
+    }
+    image.addEventListener("load", loaded, { once: true });
+    image.addEventListener("error", loaded, { once: true });
+    image.fetchPriority = "low";
+    image.loading = "eager";
+    if (image.complete) loaded();
+  }).then(function () {
+    if (image.naturalWidth && image.decode) return image.decode().catch(function () {});
+  }).then(function () {
+    image.classList.remove("is-image-loading");
+  });
+  imagePreparation.set(image, prepared);
+  return prepared;
+}
+
+// 图片距视口约 1200px 时提前准备，解码完成后再淡入，保留原生懒加载作为备用。
+function initImageLoading() {
+  if (!("IntersectionObserver" in window)) return;
+  const images = document.querySelectorAll('img[loading="lazy"]');
+  const groups = new Map();
+  document.documentElement.classList.add("media-enhanced");
+
+  const observer = new IntersectionObserver(function (entries) {
+    entries.forEach(function (entry) {
+      if (!entry.isIntersecting) return;
+      groups.get(entry.target).forEach(function (image) {
+        prepareImage(image);
+      });
+      observer.unobserve(entry.target);
+    });
+  }, { rootMargin: "1200px 0px", threshold: 0 });
+
+  images.forEach(function (image) {
+    if (image.complete && image.naturalWidth) return;
+    image.classList.add("is-image-loading");
+    image.addEventListener("load", function () { prepareImage(image); }, { once: true });
+    image.addEventListener("error", function () { prepareImage(image); }, { once: true });
+    const target = image.closest(".carousel") || image;
+    if (!groups.has(target)) {
+      groups.set(target, []);
+      observer.observe(target);
+    }
+    groups.get(target).push(image);
   });
 }
 
@@ -150,7 +226,7 @@ function initRevealAnimations() {
         observer.unobserve(entry.target);
       }
     });
-  }, { threshold: 0.08, rootMargin: "0px 0px -28px 0px" });
+  }, { threshold: 0, rootMargin: "0px 0px 160px 0px" });
 
   elements.forEach(function (element) {
     observer.observe(element);
@@ -177,10 +253,21 @@ function initCarousel() {
   let hovered = false;
   let scrolling = false;
   let cycleFinished = false;
+  const readySlides = new Set();
+  let pendingIndex = null;
+  let navigationRequest = 0;
+
+  function prepareSlide(index) {
+    return prepareImage(slides[index].querySelector("img")).then(function () {
+      readySlides.add(index);
+    });
+  }
 
   function updatePlayback() {
-    const playing = autoplayEnabled && inView && !document.hidden && !hovered && !scrolling;
+    const waiting = pendingIndex !== null || !readySlides.has(currentIndex);
+    const playing = autoplayEnabled && inView && !document.hidden && !hovered && !scrolling && !waiting;
     carousel.classList.toggle("is-paused", !playing);
+    carousel.setAttribute("aria-busy", String(inView && waiting));
     toggle.setAttribute("aria-pressed", String(autoplayEnabled));
     toggle.setAttribute("aria-label", autoplayEnabled ? "暂停自动播放" : "播放轮播");
     playIcon.hidden = autoplayEnabled;
@@ -205,20 +292,32 @@ function initCarousel() {
   }
 
   function goToSlide(index) {
-    const wrapping = currentIndex === slides.length - 1 && index === 0;
-    updateControls(index);
-    track.scrollTo({
-      left: currentIndex * track.clientWidth,
-      behavior: reducedMotion.matches || wrapping ? "auto" : "smooth"
-    });
+    const targetIndex = Math.max(0, Math.min(index, slides.length - 1));
+    const request = ++navigationRequest;
+    pendingIndex = targetIndex;
     updatePlayback();
+    function showSlide() {
+      if (request !== navigationRequest) return;
+      const wrapping = currentIndex === slides.length - 1 && targetIndex === 0;
+      pendingIndex = null;
+      updateControls(targetIndex);
+      track.scrollTo({
+        left: currentIndex * track.clientWidth,
+        behavior: reducedMotion.matches || wrapping ? "auto" : "smooth"
+      });
+      updatePlayback();
+    }
+    if (readySlides.has(targetIndex)) showSlide();
+    else prepareSlide(targetIndex).then(showSlide);
   }
 
   // 手动滑动后，同步页码和按钮状态。
   function syncAfterScroll() {
     if (track.clientWidth === 0) return;
     scrolling = false;
+    if (pendingIndex !== null) return;
     updateControls(Math.round(track.scrollLeft / track.clientWidth));
+    prepareSlide(currentIndex).then(updatePlayback);
     updatePlayback();
   }
 
@@ -232,6 +331,10 @@ function initCarousel() {
   toggle.hidden = false;
   toggle.addEventListener("click", function () {
     autoplayEnabled = !autoplayEnabled;
+    if (!autoplayEnabled) {
+      navigationRequest++;
+      pendingIndex = null;
+    }
     if (autoplayEnabled && cycleFinished) goToSlide((currentIndex + 1) % slides.length);
     updatePlayback();
   });
@@ -248,6 +351,8 @@ function initCarousel() {
   });
   track.addEventListener("pointerdown", function () {
     autoplayEnabled = false;
+    navigationRequest++;
+    pendingIndex = null;
     updatePlayback();
   });
   carousel.addEventListener("focusin", function (event) {
@@ -263,6 +368,7 @@ function initCarousel() {
   if ("IntersectionObserver" in window) {
     const visibilityObserver = new IntersectionObserver(function (entries) {
       inView = entries[0].isIntersecting && entries[0].intersectionRatio >= 0.25;
+      if (inView) prepareSlide(currentIndex).then(updatePlayback);
       updatePlayback();
     }, { threshold: [0, 0.25] });
     visibilityObserver.observe(carousel);
@@ -317,6 +423,7 @@ function initCarousel() {
     track.scrollTo({ left: currentIndex * track.clientWidth, behavior: "auto" });
   }, 180));
   updateControls(0);
+  if (inView) prepareSlide(0).then(updatePlayback);
   carousel.classList.add("has-autoplay");
   updatePlayback();
 }
@@ -382,9 +489,10 @@ function initFaqSearch() {
   });
 }
 
+initHeroVideo();
+initImageLoading();
 initMobileMenu();
 initActiveNavigation();
-initHeroVideo();
 initRevealAnimations();
 initCarousel();
 initFinishPicker();
