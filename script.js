@@ -311,6 +311,15 @@ function initCarousel() {
     else prepareSlide(targetIndex).then(showSlide);
   }
 
+  // 圆点长度跟着滑动位置连续变化：滑到两项中间时，两个圆点各拉长一半。
+  function updateDotLengths() {
+    if (track.clientWidth === 0) return;
+    const position = track.scrollLeft / track.clientWidth;
+    dotButtons.forEach(function (button, index) {
+      button.style.setProperty("--active", Math.max(0, 1 - Math.abs(index - position)).toFixed(3));
+    });
+  }
+
   // 手动滑动后，同步页码和按钮状态。
   function syncAfterScroll() {
     if (track.clientWidth === 0) return;
@@ -411,6 +420,7 @@ function initCarousel() {
   const finishScroll = debounce(syncAfterScroll, 140);
   track.addEventListener("scroll", function () {
     scrolling = true;
+    updateDotLengths();
     updatePlayback();
     if (!hasScrollEnd) finishScroll();
   }, { passive: true });
@@ -423,6 +433,7 @@ function initCarousel() {
     track.scrollTo({ left: currentIndex * track.clientWidth, behavior: "auto" });
   }, 180));
   updateControls(0);
+  updateDotLengths();
   if (inView) prepareSlide(0).then(updatePlayback);
   carousel.classList.add("has-autoplay");
   updatePlayback();
